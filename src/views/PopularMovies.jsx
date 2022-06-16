@@ -14,17 +14,21 @@ export default function PopularMovies() {
                 (result) => {
                     setIsLoaded(true);
                     setMovies(result.results);
+                    setError(null);
                 },
                 (error) => {
                     setIsLoaded(true);
+                    setMovies([]);
                     setError(error);
                 }
             );
     }, []);
 
     let componentToShow;
-    if (error) {
-        componentToShow = <div>Error: {error.message}</div>;
+    if (!isLoaded) {
+        componentToShow = <PopularMoviesLoading />
+    } else if (error != null) {
+        componentToShow = <div> Error: {error.message}</div>
     } else {
         componentToShow = <MovieGrid movies={movies}/>;
     }
@@ -39,10 +43,16 @@ export default function PopularMovies() {
             <main>
                 <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">
-                        { !error && isLoaded && componentToShow}
+                        {componentToShow}
                     </div>
                 </div>
             </main>
         </div>
     );
+}
+
+function PopularMoviesLoading() {
+    return <div className="popular-movies-loading">
+        <h4>Loading...</h4>
+    </div>
 }

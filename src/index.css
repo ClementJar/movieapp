@@ -29,3 +29,10 @@ code {
 .like-heart.liked {
   background-position: -2799px 2px;
 }
+
+.popular-movies-loading {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
