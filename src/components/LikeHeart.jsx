@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {updateLocalStorageLikedState} from "../data/useLocalStorage";
 import Heart from "./HeartUI";
+import {updateLocalStorageLikedState} from "../services/localStorageService";
 
 function isMovieLiked(movieId) {
     return localStorage.getItem(movieId) !== null;

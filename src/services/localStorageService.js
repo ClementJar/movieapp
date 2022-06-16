@@ -1,4 +1,3 @@
-
 export function updateLocalStorageLikedState(movieId, movie, isMovieLiked) {
     if (isMovieLiked) {
         localStorage.removeItem(movieId);

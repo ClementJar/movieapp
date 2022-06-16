@@ -4,11 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {setup} from "goober";
-
-// Setup goober styles
-setup(React.createElement);
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App/>);
 

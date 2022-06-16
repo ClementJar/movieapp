@@ -1,23 +1,23 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Nav from "./components/Nav";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import PopularMovies from "./views/PopularMovies";
 import LikedMovies from "./views/LikedMovies";
+import Home from "./views/Home";
 
 function App() {
-  return (
-      <>
-          <Nav/>
-          <BrowserRouter>
+    return (
+        <BrowserRouter>
             <Routes>
-              <Route path="/" element={<PopularMovies />}/>
-              <Route path="home" element={<PopularMovies />}/>
-              <Route path="liked" element={<LikedMovies />}/>
+                <Route path="/" element={<Home/>}>
+                    <Route path="" element={<Navigate to={"/home"} replace/>}/>
+                    <Route path="home" element={<PopularMovies/>}/>
+                    <Route path="liked" element={<LikedMovies/>}/>
+                </Route>
+                <Route path="*" element={<Navigate to={"/home"} replace/>}/>
             </Routes>
-          </BrowserRouter>
-      </>
-  );
+        </BrowserRouter>
+    );
 }
 
 export default App;

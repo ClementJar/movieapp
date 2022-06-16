@@ -1,14 +1,12 @@
 import {useEffect, useState} from "react";
 import {getPopularMovies} from "../services/moviesService";
 import MovieGrid from "../components/MovieGrid";
-import {useListenForLocation} from "../components/Nav";
 
 export default function PopularMovies() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [movies, setMovies] = useState([]);
 
-    useListenForLocation()
     useEffect(() => {
         getPopularMovies()
             .then(res => res.json())
@@ -27,8 +25,6 @@ export default function PopularMovies() {
     let componentToShow;
     if (error) {
         componentToShow = <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        componentToShow = <div>Loading...</div>;
     } else {
         componentToShow = <MovieGrid movies={movies}/>;
     }
@@ -43,7 +39,7 @@ export default function PopularMovies() {
             <main>
                 <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">
-                        {componentToShow}
+                        { !error && isLoaded && componentToShow}
                     </div>
                 </div>
             </main>

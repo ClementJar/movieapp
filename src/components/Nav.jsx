@@ -1,7 +1,7 @@
 import {Disclosure, Menu, Transition} from "@headlessui/react";
 import {BellIcon, MenuIcon, XIcon} from "@heroicons/react/outline";
-import {Fragment, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {Fragment} from "react";
+import {useLocation, Link} from "react-router-dom";
 
 const user = {
     name: 'Tom Cook',
@@ -19,25 +19,16 @@ const userNavigation = [
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
+
 const navArray = [
-    {name: 'Home', href: 'Home', current: false},
+    {name: 'Home', href: 'home', current: false},
     {name: 'Liked', href: 'liked', current: false}
 ]
-export function useListenForLocation (){
-    const location = useLocation();
-    const [pageName, setPageName] = useState("")
-
-    useEffect(() => {
-        console.log("Location changed");
-        setPageName(location["pathname"])
-    }, [location]);
-
-    //...
-}
 
 export default function Nav() {
-    return (
+    let location = useLocation();
 
+    return (
         <div className="min-h-full">
 
             <Disclosure as="nav" className="bg-gray-800">
@@ -55,21 +46,26 @@ export default function Nav() {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            {navArray.map((item) => (
-                                                <a
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    className={classNames(
-                                                        item.current
-                                                            ? 'bg-gray-900 text-white'
-                                                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                        'px-3 py-2 rounded-md text-sm font-medium'
-                                                    )}
-                                                    aria-current={item.current ? 'page' : undefined}
-                                                >
-                                                    {item.name}
-                                                </a>
-                                            ))}
+                                            {navArray.map((item) => {
+                                                const isCurrentlyActive = location.pathname.includes(item.href);
+
+                                                return (
+                                                    <span
+                                                        key={item.name}
+                                                        className={classNames(
+                                                            isCurrentlyActive
+                                                                ? 'bg-gray-900 text-white'
+                                                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                            'px-3 py-2 rounded-md text-sm font-medium'
+                                                        )}
+                                                        aria-current={isCurrentlyActive ? 'page' : undefined}>
+                                                    <Link to={item.href}>
+                                                        {item.name}
+                                                    </Link>
+                                                </span>
+                                                );
+                                            })
+                                            }
                                         </div>
                                     </div>
                                 </div>
