@@ -1,3 +1,13 @@
+![image](https://user-images.githubusercontent.com/49057055/174958598-7f35e88b-3065-4fdf-8e47-999cbdb50136.png)
+
+# To get started 
+ RUN 
+
+1. npm install react-router-dom@6
+2. npm install -D tailwindcss postcss autoprefixer
+3. npx tailwindcss init -p
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
